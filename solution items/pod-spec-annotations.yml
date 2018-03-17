@@ -1,0 +1,61 @@
+# pod 资源配置文件声明规范注释
+# which version of the Kubernetes api you’re using to create this object.
+apiVersion: v1 
+# what kind of object you want to create.
+kind: Pod
+# data that helps uniquely identify the object, including a name string, UID, and optional namespace.
+metadata:
+  labels:
+    test: liveness
+  name: health-liveness-api
+# 对象的规格说明，The precise format of the object spec is different for every Kubernetes object.
+spec:
+  containers:
+  - name: health-liveness-api
+    image: justmine/healthchecksapi:v1.1
+# 镜像拉取策略，IfNotPresent表示先拉取本地主机上的镜像，没有再去拉取远程资源库。
+    imagePullPolicy: IfNotPresent 
+# assign a Kubernetes Pod to a particular node in a Kubernetes cluster.
+# 选择器标签如（disktype:ssd）可以通过 kubectl get nodes --show-labels 查看，标签用户可以通过 kubectl label nodes <your-node-name> disktype=ssd 自定义。
+    nodeSelector:
+      disktype: ssd
+# define a named pord
+    ports:
+    - name: heath-port
+      containerPort: 8080
+      hostPort: 8080
+# liveness for Containers. the kubelet uses liveness probes to know when to restart a Container. 
+    livenessProbe:
+      httpGet:
+        path: /api/v1/heathchecks/liveness
+        port: heath-port
+        httpHeaders:
+        - name: X-Custom-Header
+          value: Awesome 
+# Number of seconds after the container has started before liveness or readiness probes are initiated.
+      initialDelaySeconds: 5
+# How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1.
+      periodSeconds: 5
+# Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1.
+      timeoutSeconds: 1
+# Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness. Minimum value is 1.
+      successThreshold: 1
+# When a Pod starts and the probe fails, Kubernetes will try failureThreshold times before giving up. Giving up in case of liveness probe means restarting the Pod. In case of readiness probe the Pod will be marked Unready. Defaults to 3. Minimum value is 1.
+      failureThreshold: 1
+# readiness for Containers.the kubelet uses readiness probes to know when a Container is ready to start accepting traffic.
+    readinessProbe:
+      httpGet:
+# scheme to use for connecting to the host (HTTP or HTTPS). Defaults to HTTP.
+        scheme: http
+# host name to connect to, defaults to the pod IP. You probably want to set “Host” in httpHeaders instead.
+        host: 127.0.0.1
+# path to access on the HTTP server.
+        path: /api/v1/heathchecks/Readiness
+# name or number of the port to access on the container. Number must be in the range 1 to 65535.
+        port: heath-port
+# custom headers to set in the request. HTTP allows repeated headers.
+        httpHeaders:
+        - name: X-Custom-Header
+          value: Awesome 
+      initialDelaySeconds: 5
+      periodSeconds: 5

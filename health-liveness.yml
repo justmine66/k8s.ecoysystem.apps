@@ -8,14 +8,26 @@ spec:
   containers:
   - name: health-liveness-api
     image: justmine/healthchecksapi:v1.1
+    imagePullPolicy: IfNotPresent
+    nodeSelector:
+      disktype: ssd
     ports:
-    - name: liveness-port
+    - name: heath-port
       containerPort: 8080
       hostPort: 8080
     livenessProbe:
       httpGet:
         path: /api/v1/heathchecks/liveness
-        port: liveness-port
+        port: heath-port
+        httpHeaders:
+        - name: X-Custom-Header
+          value: Awesome 
+      initialDelaySeconds: 5
+      periodSeconds: 5
+    readinessProbe:
+      httpGet:
+        path: /api/v1/heathchecks/Readiness
+        port: heath-port
         httpHeaders:
         - name: X-Custom-Header
           value: Awesome 

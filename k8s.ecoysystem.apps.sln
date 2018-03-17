@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution items", "{1A47983A-EF2F-4857-9C13-CC23EC7FC495}"
 	ProjectSection(SolutionItems) = preProject
 		solution items\k8s-cluster-building.MD = solution items\k8s-cluster-building.MD
+		solution items\pod-spec-annotations.yml = solution items\pod-spec-annotations.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthChecks.Api", "src\HealthChecks.Api\HealthChecks.Api.csproj", "{2B518C1A-0095-4FB5-AC45-FBC0293E4751}"
