@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: health-liveness-api
+spec:
+  containers:
+  - name: health-liveness-api
+    image: justmine/healthchecksapi:v1.1
+    ports:
+    - name: liveness-port
+      containerPort: 8080
+      hostPort: 8080
+    livenessProbe:
+      httpGet:
+        path: /api/v1/heathchecks/liveness
+        port: liveness-port
+        httpHeaders:
+        - name: X-Custom-Header
+          value: Awesome 
+      initialDelaySeconds: 5
+      periodSeconds: 5

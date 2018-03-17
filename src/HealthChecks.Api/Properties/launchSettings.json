@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "HealthChecks.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "api/v1/heathchecks/liveness",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:8000/"
+    }
+  }
+}

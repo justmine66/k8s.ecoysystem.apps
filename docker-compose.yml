@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  healthchecks.api:
+    image: healthchecksapi
+    build:
+      context: .
+      dockerfile: src/HealthChecks.Api/Dockerfile
