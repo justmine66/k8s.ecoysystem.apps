@@ -11,6 +11,9 @@ metadata:
   name: health-liveness-api
 # 对象的规格说明，The precise format of the object spec is different for every Kubernetes object.
 spec:
+  # Kubernetes 默认的健康检查机制
+  # 每个容器启动时都会执行一个进程，此进程由 Dockerfile 的 CMD 或 ENTRYPOINT 指定。如果进程退出时返回码非零，则认为容器发生故障，Kubernetes 就会根据 restartPolicy 重启容器。
+  restartPolicy: OnFailure
   containers:
   - name: health-liveness-api
     image: justmine/healthchecksapi:v1.1
