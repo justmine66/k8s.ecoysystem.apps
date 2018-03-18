@@ -1,17 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27428.1
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6057DF4A-35DE-48F0-B070-7FC5C1D1169E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution items", "{1A47983A-EF2F-4857-9C13-CC23EC7FC495}"
 	ProjectSection(SolutionItems) = preProject
-		solution items\k8s-cluster-building.MD = solution items\k8s-cluster-building.MD
+		solution items\data-packed-volume-container-Dockerfile = solution items\data-packed-volume-container-Dockerfile
+		solution items\deployment-spec-annotations.yml = solution items\deployment-spec-annotations.yml
+		solution items\docker-commands-summary.md = solution items\docker-commands-summary.md
+		solution items\dockerfile-annotations.md = solution items\dockerfile-annotations.md
+		solution items\k8s-cluster-building.md = solution items\k8s-cluster-building.md
+		solution items\k8s-commands-summary.md = solution items\k8s-commands-summary.md
 		solution items\pod-spec-annotations.yml = solution items\pod-spec-annotations.yml
+		solution items\service-spec-annotations.yml = solution items\service-spec-annotations.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthChecks.Api", "src\HealthChecks.Api\HealthChecks.Api.csproj", "{2B518C1A-0095-4FB5-AC45-FBC0293E4751}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthChecks.Api", "src\HealthChecks.Api\HealthChecks.Api.csproj", "{2B518C1A-0095-4FB5-AC45-FBC0293E4751}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6E524B4D-E574-4998-B15D-B4B454355794}"
 EndProject

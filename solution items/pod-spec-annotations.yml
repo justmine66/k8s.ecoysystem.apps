@@ -1,10 +1,11 @@
-# pod 资源配置文件声明规范注释
+# pod 资源配置文件声明规范注解
 # which version of the Kubernetes api you’re using to create this object.
 apiVersion: v1 
 # what kind of object you want to create.
 kind: Pod
 # data that helps uniquely identify the object, including a name string, UID, and optional namespace.
 metadata:
+# 定义标签，Service 将会用这个 label 来挑选 Pod。
   labels:
     test: liveness
   name: health-liveness-api
@@ -13,10 +14,12 @@ spec:
   containers:
   - name: health-liveness-api
     image: justmine/healthchecksapi:v1.1
-# 镜像拉取策略，IfNotPresent表示先拉取本地主机上的镜像，没有再去拉取远程资源库。
+# 镜像拉取策略，The default pull policy is IfNotPresent; use :latest as the tag for the image to use.
+# IfNotPresent: it causes the Kubelet to skip pulling an image if it already exists.
+# Always: it always force a pull.
     imagePullPolicy: IfNotPresent 
 # assign a Kubernetes Pod to a particular node in a Kubernetes cluster.
-# 选择器标签如（disktype:ssd）可以通过 kubectl get nodes --show-labels 查看，标签用户可以通过 kubectl label nodes <your-node-name> disktype=ssd 自定义。
+# 选择器标签如（disktype:ssd）可以通过 kubectl get nodes --show-labels 查看，用户可以通过 kubectl label nodes <your-node-name> disktype=ssd 自定义。
     nodeSelector:
       disktype: ssd
 # define a named pord

@@ -14,7 +14,7 @@
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
-    <None Include="health-liveness.MD" />
+    <None Include="health-liveness.md" />
     <None Include="health-liveness.yml" />
   </ItemGroup>
 </Project>

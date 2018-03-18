@@ -1,0 +1,34 @@
+# service 资源配置文件声明规范注解
+# which version of the Kubernetes api you’re using to create this object.
+apiVersion: v1 
+# what kind of object you want to create.
+kind: Service
+# data that helps uniquely identify the object, including a name string, UID, and optional namespace.
+metadata:
+  name: http-svc
+  # 指定资源所属的 namespace
+  namespace: kube-public
+spec:
+  # 服务类型，默认是ClusterIP。
+  # 1、ClusterIP 
+  # Service 通过 Cluster 内部的 IP 对外提供服务，只有 Cluster 内的节点和 Pod 可访问，这是默认的 Service 类型。
+  # 2、NodePort 
+  # Service 通过 Cluster 节点的静态端口对外提供服务。Cluster 外部可以通过 <NodeIP>:<NodePort> 访问 Service。
+  # 3、LoadBalancer 
+  # Service 利用 cloud provider 特有的 load balancer 对外提供服务，cloud provider 负责将 load balancer 的流量导向 Service。目前支持的 cloud provider 有 GCP、AWS、Azur 等。
+  type: NodePort
+  # selector 指明挑选 label 为 run: httpd 的Pod 作为 Service 的后端。
+  selector:
+    run: httpd
+  ports:
+    # 使用 TCP 协议
+    protocol: TCP
+    # 节点上监听的端口。范围为30000-32767。
+    nodePort: 30000
+    # Service 的 8080 端口映射到 Pod 的 80 端口
+    # ClusterIP 上监听的端口
+    port: 8080
+    # Pod 监听的端口
+    targetPort: 80 # 此端口需要与pod暴露的保持一致
+
+

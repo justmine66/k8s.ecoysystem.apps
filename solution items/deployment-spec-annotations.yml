@@ -1,0 +1,31 @@
+# deployment 资源配置文件声明规范注解
+# 多个资源可以在一个 YAML 文件中定义，用 --- 分割。
+# which version of the Kubernetes api you’re using to create this object.
+# for versions before 1.9.0 use apps/v1beta2.
+apiVersion: apps/v1
+# 要创建的资源类型
+kind: Deployment
+# 该资源的元数据，name 是必需的元数据项。
+metadata:
+  name: nginx-deployment
+  # 指定资源所属的 namespace
+  namespace: kube-public
+# 该 Deployment 的规格说明。
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+# tells deployment to run 2 pods matching the template
+  replicas: 2 
+# create pods using pod definition in this template
+  template: 
+    metadata:
+# 定义标签，Service 将会用这个 label 来挑选 Pod。
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
