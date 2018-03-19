@@ -1,14 +1,14 @@
 FROM microsoft/aspnetcore:2.0 AS base
 WORKDIR /app
-EXPOSE 8000
+EXPOSE 8001
 
 FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
 COPY k8s.ecoysystem.apps.sln ./
-COPY src/HealthChecks.Api/HealthChecks.Api.csproj src/HealthChecks.Api/
+COPY src/HelloWord.Api/HelloWord.Api.csproj src/HelloWord.Api/
 RUN dotnet restore -nowarn:msb3202,nu1503
 COPY . .
-WORKDIR /src/src/HealthChecks.Api
+WORKDIR /src/src/HelloWord.Api
 RUN dotnet build -c Release -o /app
 
 FROM build AS publish
@@ -17,4 +17,4 @@ RUN dotnet publish -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "HealthChecks.Api.dll"]
+ENTRYPOINT ["dotnet", "HelloWord.Api.dll"]

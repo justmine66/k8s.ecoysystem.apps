@@ -2,7 +2,14 @@ version: '3'
 
 services:
   healthchecks.api:
-    image: healthchecksapi
+    image: healthchecksapi:v1.1
     build:
       context: .
       dockerfile: src/HealthChecks.Api/Dockerfile
+
+  helloword.api:
+    image: hellowordapi
+    build:
+      context: .
+      dockerfile: src/HelloWord.Api/Dockerfile
+

@@ -7,19 +7,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6057DF4A-35D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution items", "{1A47983A-EF2F-4857-9C13-CC23EC7FC495}"
 	ProjectSection(SolutionItems) = preProject
+		solution items\create-self-signed-certificates.md = solution items\create-self-signed-certificates.md
 		solution items\data-packed-volume-container-Dockerfile = solution items\data-packed-volume-container-Dockerfile
 		solution items\deployment-spec-annotations.yml = solution items\deployment-spec-annotations.yml
 		solution items\docker-commands-summary.md = solution items\docker-commands-summary.md
 		solution items\dockerfile-annotations.md = solution items\dockerfile-annotations.md
 		solution items\k8s-cluster-building.md = solution items\k8s-cluster-building.md
 		solution items\k8s-commands-summary.md = solution items\k8s-commands-summary.md
+		solution items\k8s-control-plannel-images.sh = solution items\k8s-control-plannel-images.sh
+		solution items\k8s-private-registry-building.md = solution items\k8s-private-registry-building.md
 		solution items\pod-spec-annotations.yml = solution items\pod-spec-annotations.yml
+		solution items\private-registry-building.md = solution items\private-registry-building.md
+		solution items\service-account-admin.md = solution items\service-account-admin.md
+		solution items\service-account-admin.yml = solution items\service-account-admin.yml
 		solution items\service-spec-annotations.yml = solution items\service-spec-annotations.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthChecks.Api", "src\HealthChecks.Api\HealthChecks.Api.csproj", "{2B518C1A-0095-4FB5-AC45-FBC0293E4751}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6E524B4D-E574-4998-B15D-B4B454355794}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWord.Api", "src\HelloWord.Api\HelloWord.Api.csproj", "{A622D16B-7D27-4B68-BAD9-3E1C2993E16C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,12 +43,17 @@ Global
 		{6E524B4D-E574-4998-B15D-B4B454355794}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E524B4D-E574-4998-B15D-B4B454355794}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E524B4D-E574-4998-B15D-B4B454355794}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A622D16B-7D27-4B68-BAD9-3E1C2993E16C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A622D16B-7D27-4B68-BAD9-3E1C2993E16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A622D16B-7D27-4B68-BAD9-3E1C2993E16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A622D16B-7D27-4B68-BAD9-3E1C2993E16C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2B518C1A-0095-4FB5-AC45-FBC0293E4751} = {6057DF4A-35DE-48F0-B070-7FC5C1D1169E}
+		{A622D16B-7D27-4B68-BAD9-3E1C2993E16C} = {6057DF4A-35DE-48F0-B070-7FC5C1D1169E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {404CA4B7-EDF7-4FFD-972E-FF4D00AD2BA7}

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: helloworlds
+  name: hello-world-api
+spec:
+  containers:
+  - name: hello-world-api
+    image: justmine/hellowordapi:v1.1
+    imagePullPolicy: IfNotPresent
+    ports:
+    - containerPort: 8001
+      hostPort: 8080
+    args:
+    - /bin/sh
+    - -c
+    - while true; do sleep 1; done

@@ -26,8 +26,9 @@ namespace HealthChecks.Api.Controllers.v1
         {
             return await Task.Run<IActionResult>(() =>
             {
-                //轮询存活，间隔60秒
-                if (DateTime.UtcNow.Subtract(_beginUtc).TotalSeconds % 60 == 0)
+                //存活2分钟
+                //探测失败，将重启容器，进入自愈阶段。
+                if (DateTime.UtcNow.Subtract(_beginUtc).TotalSeconds > 120)
                 {
                     Console.WriteLine("{0} HealthChecks.Api is dead, start restrating.", DateTime.Now);
                     return this.InternalServerError();
@@ -51,8 +52,9 @@ namespace HealthChecks.Api.Controllers.v1
         {
             return await Task.Run<IActionResult>(() =>
             {
-                //轮询准备就绪，间隔60秒
-                if (DateTime.UtcNow.Subtract(_beginUtc).TotalSeconds % 60 == 0)
+                //等待30秒准备就绪
+                //应用启动通常都需要一个准备阶段，比如加载缓存数据，连接数据库等，从容器启动到正真能够提供服务是需要一段时间的。
+                if (DateTime.UtcNow.Subtract(_beginUtc).TotalSeconds < 30)
                 {
                     Console.WriteLine("{0} HealthChecks.Api is ready,start accepting traffic.", DateTime.Now);
                     return this.InternalServerError();

@@ -14,6 +14,10 @@ spec:
   # Kubernetes 默认的健康检查机制
   # 每个容器启动时都会执行一个进程，此进程由 Dockerfile 的 CMD 或 ENTRYPOINT 指定。如果进程退出时返回码非零，则认为容器发生故障，Kubernetes 就会根据 restartPolicy 重启容器。
   restartPolicy: OnFailure
+  # To pull the image from the private registry, Kubernetes needs credentials.
+  imagePullSecrets:
+  # specifies that Kubernetes should get the credentials from a Secret named regcred.
+  - name: regcred
   containers:
   - name: health-liveness-api
     image: justmine/healthchecksapi:v1.1
