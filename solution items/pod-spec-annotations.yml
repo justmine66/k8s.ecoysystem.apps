@@ -18,23 +18,75 @@ spec:
   imagePullSecrets:
   # specifies that Kubernetes should get the credentials from a Secret named regcred.
   - name: regcred
+  # defines what volumes to provide for the pod
+  volumes:
+  - name: workdir
+    emptyDir: {}
+    或
+    configMap:
+        # Provide the name of the ConfigMap containing the files you want
+        # to add to the container
+        name: special-config
+
   containers:
   - name: health-liveness-api
-    image: justmine/healthchecksapi:v1.1
-# 镜像拉取策略，The default pull policy is IfNotPresent; use :latest as the tag for the image to use.
-# IfNotPresent: it causes the Kubelet to skip pulling an image if it already exists.
-# Always: it always force a pull.
+    # 镜像拉取策略，The default pull policy is IfNotPresent; use :latest as the tag for the image to use.
+    # IfNotPresent: it causes the Kubelet to skip pulling an image if it already exists.
+    # Always: it always force a pull.
     imagePullPolicy: IfNotPresent 
-# assign a Kubernetes Pod to a particular node in a Kubernetes cluster.
-# 选择器标签如（disktype:ssd）可以通过 kubectl get nodes --show-labels 查看，用户可以通过 kubectl label nodes <your-node-name> disktype=ssd 自定义。
-    nodeSelector:
-      disktype: ssd
-# define a named pord
+    image: justmine/healthchecksapi:v1.1
+
+    # define commands for the containers that run in the Pod
+    command:
+    - wget
+    - "-O"
+    - "/work-dir/index.html"
+    - http://kubernetes.io 
+    或
+    command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']
+
+    # define arguments for the containers that run in the Pod
+    args: ["HOSTNAME", "KUBERNETES_PORT"]
+    #Define a Pod environment variable with data from ConfigMap files
+    env:
+    - name: SPECIAL_LEVEL_KEY
+      value: "hello world"
+    或
+    env:
+    # Define the environment variable
+    - name: SPECIAL_LEVEL_KEY
+        valueFrom:
+        configMapKeyRef:
+            # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
+            name: special-config
+            # Specify the key associated with the value
+            key: special.how
+    或
+    #Use envFrom to define all of the ConfigMap’s data as Pod environment variables. The key from the ConfigMap becomes the environment variable name in the Pod.
+    envFrom:
+      - configMapRef:
+          name: special-config
+
+    # Attach Handlers to Container Lifecycle Events
+    lifecycle:
+      # Kubernetes sends the postStart event immediately after a Container is started.
+      postStart:
+        exec:
+          command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
+      # Kubernetes sends the preStop event immediately before the Container is terminated.
+      preStop:
+        exec:
+          command: ["/usr/sbin/nginx","-s","quit"]
+    # assign a Kubernetes Pod to a particular node in a Kubernetes cluster.
+    # 选择器标签如（disktype:ssd）可以通过 kubectl get nodes --show-labels 查看，用户可以通过 kubectl label nodes <your-node-name> disktype=ssd 自定义。
+        nodeSelector:
+          disktype: ssd
+    # define a named pord
     ports:
     - name: heath-port
       containerPort: 8080
       hostPort: 8080
-# liveness for Containers. the kubelet uses liveness probes to know when to restart a Container. 
+    # liveness for Containers. the kubelet uses liveness probes to know when to restart a Container. 
     livenessProbe:
       httpGet:
         path: /api/v1/heathchecks/liveness
@@ -42,30 +94,52 @@ spec:
         httpHeaders:
         - name: X-Custom-Header
           value: Awesome 
-# Number of seconds after the container has started before liveness or readiness probes are initiated.
+      # Number of seconds after the container has started before liveness or readiness probes are initiated.
       initialDelaySeconds: 5
-# How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1.
+      # How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1.
       periodSeconds: 5
-# Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1.
+      # Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1.
       timeoutSeconds: 1
-# Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness. Minimum value is 1.
+      # Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness. Minimum value is 1.
       successThreshold: 1
-# When a Pod starts and the probe fails, Kubernetes will try failureThreshold times before giving up. Giving up in case of liveness probe means restarting the Pod. In case of readiness probe the Pod will be marked Unready. Defaults to 3. Minimum value is 1.
+      # When a Pod starts and the probe fails, Kubernetes will try failureThreshold times before giving up. Giving up in case of liveness probe means restarting the Pod. In case of readiness probe the Pod will be marked Unready. Defaults to 3. Minimum value is 1.
       failureThreshold: 1
-# readiness for Containers.the kubelet uses readiness probes to know when a Container is ready to start accepting traffic.
+    # readiness for Containers.the kubelet uses readiness probes to know when a Container is ready to start accepting traffic.
     readinessProbe:
       httpGet:
-# scheme to use for connecting to the host (HTTP or HTTPS). Defaults to HTTP.
+        # scheme to use for connecting to the host (HTTP or HTTPS). Defaults to HTTP.
         scheme: http
-# host name to connect to, defaults to the pod IP. You probably want to set “Host” in httpHeaders instead.
+        # host name to connect to, defaults to the pod IP. You probably want to set “Host” in httpHeaders instead.
         host: 127.0.0.1
-# path to access on the HTTP server.
+        # path to access on the HTTP server.
         path: /api/v1/heathchecks/Readiness
-# name or number of the port to access on the container. Number must be in the range 1 to 65535.
+        # name or number of the port to access on the container. Number must be in the range 1 to 65535.
         port: heath-port
-# custom headers to set in the request. HTTP allows repeated headers.
+        # custom headers to set in the request. HTTP allows repeated headers.
         httpHeaders:
         - name: X-Custom-Header
           value: Awesome 
       initialDelaySeconds: 5
       periodSeconds: 5
+    # specifies where to mount those into containers
+    volumeMounts:
+    - name: workdir
+      mountPath: "/work-dir"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

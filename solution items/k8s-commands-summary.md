@@ -4,3 +4,6 @@
 # kubectl apply 
 >**Apply the changes made to the configuration file**
 >usage: kubectl apply -f https://k8s.io/docs/concepts/overview/object-management-kubectl/update_deployment.yaml
+# kubectl exec 
+>**Execute a command in a container**
+>usage: kubectl exec -it lifecycle-demo -- /bin/bash 

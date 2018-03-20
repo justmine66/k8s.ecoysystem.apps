@@ -2,8 +2,9 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    test: heathchecks
+    api: heathchecks
   name: health-checks-api
+  namespace: 
 spec:
   containers:
   - name: health-checks-api
@@ -15,6 +16,7 @@ spec:
       hostPort: 8000
     livenessProbe:
       httpGet:
+        scheme: HTTP
         path: /api/v1/heathchecks/liveness
         port: heath-port
         httpHeaders:
@@ -24,6 +26,7 @@ spec:
       periodSeconds: 5
     readinessProbe:
       httpGet:
+        scheme: HTTP
         path: /api/v1/heathchecks/Readiness
         port: heath-port
         httpHeaders:

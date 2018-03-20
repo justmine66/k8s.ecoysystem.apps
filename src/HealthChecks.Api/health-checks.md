@@ -1,8 +1,8 @@
 # 推送镜像到私有仓库(registry.geekbuy.cn)
-docker tag healthchecksapi:dev registry.geekbuy.cn/justmine/healthchecksapi:v1.1
-docker tag healthchecksapi:dev justmine/healthchecksapi:v1.1
+docker tag healthchecksapi:dev registry.geekbuy.cn/justmine/healthchecksapi:v1.3
+docker tag healthchecksapi:latest justmine/healthchecksapi:v1.3
 http: docker push registry.geekbuy.cn:5000/justmine/healthchecksapi:v1.1
-https: docker push registry.geekbuy.cn/justmine/healthchecksapi:v1.1
+https: docker push justmine/healthchecksapi:v1.3
 
 # 从私有仓库(registry.geekbuy.cn)拉取镜像到master
 http: docker pull registry.geekbuy.cn:5000/justmine/healthchecksapi:v1.1 

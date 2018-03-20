@@ -1,3 +1,7 @@
+--安装 Docker
+apt-get update && apt-get install docker.io
+--安装 kubelet、kubeadm 和 kubectl
+apt-get update && apt-get install -y apt-transport-httpscurl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -cat <<EOF >/etc/apt/sources.list.d/kubernetes.listdeb http://apt.kubernetes.io/ kubernetes-xenial mainEOFapt-get updateapt-get install -y kubelet kubeadm kubectl
 --重置
 kubeadm reset
 --准备

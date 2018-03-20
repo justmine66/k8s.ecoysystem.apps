@@ -5,11 +5,11 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
-      - "8000:8000"
+      - "8000:80"
 
   helloword.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
-      - "8001:8001"
+      - "8001:80"
 

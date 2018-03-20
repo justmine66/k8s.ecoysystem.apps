@@ -1,18 +1,14 @@
 apiVersion: v1
 kind: Pod
 metadata:
+  name: helloword-api
   labels:
-    test: helloworlds
-  name: hello-world-api
+    app: helloword-api
+  namespace: k8s-ecoysystem-apps
 spec:
   containers:
-  - name: hello-world-api
-    image: justmine/hellowordapi:v1.1
-    imagePullPolicy: IfNotPresent
+  - name: helloword-api
+    image: justmine/hellowordapi:v1.2
+    imagePullPolicy: Always
     ports:
-    - containerPort: 8001
-      hostPort: 8080
-    args:
-    - /bin/sh
-    - -c
-    - while true; do sleep 1; done
+    - containerPort: 80

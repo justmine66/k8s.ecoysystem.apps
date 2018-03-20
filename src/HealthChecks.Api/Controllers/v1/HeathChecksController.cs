@@ -26,9 +26,9 @@ namespace HealthChecks.Api.Controllers.v1
         {
             return await Task.Run<IActionResult>(() =>
             {
-                //存活2分钟
+                //存活10分钟
                 //探测失败，将重启容器，进入自愈阶段。
-                if (DateTime.UtcNow.Subtract(_beginUtc).TotalSeconds > 120)
+                if (DateTime.UtcNow.Subtract(_beginUtc).TotalSeconds > 60 * 10)
                 {
                     Console.WriteLine("{0} HealthChecks.Api is dead, start restrating.", DateTime.Now);
                     return this.InternalServerError();
