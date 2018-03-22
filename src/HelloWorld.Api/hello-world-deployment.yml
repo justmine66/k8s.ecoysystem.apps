@@ -1,23 +1,21 @@
 apiVersion: apps/v1  
 kind: Deployment
 metadata:
-  name: hellowordapi
+  name: helloworldapi
   namespace: k8s-ecoysystem-apps
 spec:
-  paused: true
   selector:
     matchLabels:
-      app: hellowordapi
-  replicas: 2  
-  template:  
+      app: helloworldapi
+  replicas: 2
+  template:
     metadata:
       labels:
-        app: hellowordapi
+        app: helloworldapi
       namespace: k8s-ecoysystem-apps
     spec:
       containers:
-      - name: hellowordapi
-        image: justmine/hellowordapi:v1.2
-        imagePullPolicy: Always
+      - name: helloworldapi
+        image: justmine/helloworldapi:v1.0
         ports:
         - containerPort: 80

@@ -1,8 +1,8 @@
 # 推送镜像到私有仓库(registry.geekbuy.cn)
 docker tag healthchecksapi:dev registry.geekbuy.cn/justmine/healthchecksapi:v1.3
-docker tag healthchecksapi:latest justmine/healthchecksapi:v1.3
+docker tag healthchecksapi:v1.5 justmine/healthchecksapi:v1.5
 http: docker push registry.geekbuy.cn:5000/justmine/healthchecksapi:v1.1
-https: docker push justmine/healthchecksapi:v1.3
+https: docker push justmine/healthchecksapi:v1.5
 
 # 从私有仓库(registry.geekbuy.cn)拉取镜像到master
 http: docker pull registry.geekbuy.cn:5000/justmine/healthchecksapi:v1.1 
@@ -18,7 +18,14 @@ kubectl apply -f health-checks-pod.yml
 kubectl delete -f health-checks-pod.yml
 
 # 查看pod状态
-kubectl get pod
-kubectl describe pod health-checks-api
-kubectl delete pod health-checks-api
+kubectl get pod -n k8s-ecoysystem-apps
+kubectl describe pod healthchecks-api-5d8984699f -n k8s-ecoysystem-apps
+kubectl delete pod health-checks-api -n k8s-ecoysystem-apps
+
+# deployment
+cat << eof>health-checks-deployment.yml
+kubectl apply -f health-checks-deployment.yml
+kubectl delete -f health-checks-deployment.yml
+
+
 

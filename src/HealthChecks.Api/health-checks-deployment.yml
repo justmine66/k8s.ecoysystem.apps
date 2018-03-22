@@ -2,32 +2,32 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: k8s-ecoysystem-apps
-  name: healthchecks.api
+  name: healthchecks-api
   labels:
-    app: healthchecks.api
+    app: healthchecks-api
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: healthchecks.api
+      app: healthchecks-api
   template:
     metadata:
       namespace: k8s-ecoysystem-apps
       labels:
-        app: healthchecks.api
+        app: healthchecks-api
     spec:
       containers:
-      - name: healthchecks.api
+      - name: healthchecks-api
         imagePullPolicy: Always
-        image: justmine/healthchecksapi:v1.1
+        image: justmine/healthchecksapi:v1.5
         ports:
         - containerPort: 80
         readinessProbe:
           httpGet:
-            path: /api/v1/heathchecks/Readiness
+            path: /api/v1/heathchecks/readiness
             port: 80
             scheme: HTTP 
-          initialDelaySeconds: 60
+          initialDelaySeconds: 30
           periodSeconds: 60 
         livenessProbe:
           httpGet:

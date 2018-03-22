@@ -12,10 +12,13 @@ metadata:
   namespace: kube-public
 # 该 Deployment 的规格说明。
 spec:
-  # defines how the Deployment finds which Pods to manage.
+  # defines how the Deployment finds which Pods to manage.if it is unspecified, it will be defaulted to .spec.template.metadata.labels.
   selector:
     matchLabels:
       app: nginx
+  # specifies the strategy used to replace old Pods by new ones.it can be“Recreate”or“RollingUpdate”.“RollingUpdate”is the default value.
+  strategy:
+    type: Recreate
   # 指明保留revison的数量，以便可以随时回滚回旧版本。需要与--record配合使用。
   # --record 的作用是将当前命令记录到 revision 记录中
   revisionHistoryLimit: 10
@@ -31,6 +34,8 @@ spec:
     spec:
       containers:
       - name: nginx
+        # specifies an appropriate restart container policy
+        restartPolicy: Always
         image: nginx:1.7.9
         ports:
         - containerPort: 80

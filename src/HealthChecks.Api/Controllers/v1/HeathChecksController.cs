@@ -9,9 +9,9 @@ namespace HealthChecks.Api.Controllers.v1
     [Route("api/v1/[controller]")]
     public class HeathChecksController : Controller
     {
-        private readonly DateTime _beginUtc = DateTime.UtcNow;
+        private readonly static DateTime _beginUtc = DateTime.UtcNow;
 
-        /// <summary>存活
+        /// <summary>存活性
         /// </summary>
         /// <remarks>
         /// The kubelet uses liveness probes to know when to restart a Container. 
@@ -30,12 +30,12 @@ namespace HealthChecks.Api.Controllers.v1
                 //探测失败，将重启容器，进入自愈阶段。
                 if (DateTime.UtcNow.Subtract(_beginUtc).TotalSeconds > 60 * 10)
                 {
-                    Console.WriteLine("{0} HealthChecks.Api is dead, start restrating.", DateTime.Now);
+                    Console.WriteLine("{0} HealthChecks.Api is dead, start restarting...", DateTime.Now);
                     return this.InternalServerError();
                 }
                 else
                 {
-                    Console.WriteLine("{0} HealthChecks.Api is alive", DateTime.Now);
+                    Console.WriteLine("{0} HealthChecks.Api is alive.", DateTime.Now);
                     return this.Ok();
                 }
             });
@@ -56,12 +56,12 @@ namespace HealthChecks.Api.Controllers.v1
                 //应用启动通常都需要一个准备阶段，比如加载缓存数据，连接数据库等，从容器启动到正真能够提供服务是需要一段时间的。
                 if (DateTime.UtcNow.Subtract(_beginUtc).TotalSeconds < 30)
                 {
-                    Console.WriteLine("{0} HealthChecks.Api is ready,start accepting traffic.", DateTime.Now);
+                    Console.WriteLine("{0} HealthChecks.Api is not ready...", DateTime.Now);
                     return this.InternalServerError();
                 }
                 else
                 {
-                    Console.WriteLine("{0} HealthChecks.Api is not ready", DateTime.Now);
+                    Console.WriteLine("{0} HealthChecks.Api is ready, start accepting traffic...", DateTime.Now);
                     return this.Ok();
                 }
             });
