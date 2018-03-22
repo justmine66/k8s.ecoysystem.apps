@@ -9,16 +9,28 @@ metadata:
   labels:
     test: liveness
   name: health-liveness-api
-# 对象的规格说明，The precise format of the object spec is different for every Kubernetes object.
+# 对象的规格说明，The precise format of the object spec is different for every Kubernetes object.default 
 spec:
+  # an optional field which can be used to specify the Pod’s hostname.
+  hostname: health-liveness-api
+  # an optional field which can be used to specify the Pod’s subdomain. 
+  subdomain: default-subdomain
   # Kubernetes 默认的健康检查机制
   # 每个容器启动时都会执行一个进程，此进程由 Dockerfile 的 CMD 或 ENTRYPOINT 指定。如果进程退出时返回码非零，则认为容器发生故障，Kubernetes 就会根据 restartPolicy 重启容器。
+  # the field with possible values Always, OnFailure, and Never.
   restartPolicy: OnFailure
   # To pull the image from the private registry, Kubernetes needs credentials.
   imagePullSecrets:
   # specifies that Kubernetes should get the credentials from a Secret named regcred.
   - name: regcred
   # defines what volumes to provide for the pod
+  # specifies rolling update strategy
+  strategy:
+    rollingupdate: 
+      # 控制滚动更新过程中副本总数的超过 DESIRED 的上限。默认值为 25%。
+      maxSurge: 35%
+      # 控制滚动更新过程中，不可用的副本相占 DESIRED 的最大比例。 默认值为 25%。
+      maxUnavailable: 35%
   volumes:
   - name: workdir
     emptyDir: {}

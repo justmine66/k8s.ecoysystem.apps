@@ -7,3 +7,5 @@
 # kubectl exec 
 >**Execute a command in a container**
 >usage: kubectl exec -it lifecycle-demo -- /bin/bash 
+# kubectl delete
+>Ç¿ÖÆÉ¾³ýpod: kubectl delete <resource> --grace-period=0 --force
