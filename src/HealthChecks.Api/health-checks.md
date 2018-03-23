@@ -26,6 +26,4 @@ kubectl delete pod health-checks-api -n k8s-ecoysystem-apps
 cat << eof>health-checks-deployment.yml
 kubectl apply -f health-checks-deployment.yml
 kubectl delete -f health-checks-deployment.yml
-
-
-
+kubectl rollout status deployment/healthchecks-api -n k8s-ecoysystem-apps

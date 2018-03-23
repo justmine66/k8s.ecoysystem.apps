@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: k8s-ecoysystem-apps
+  name: helloworldapi-appsetting
+  labels:
+    app: helloworldapi  
+data:
+  HelloWorldBus: kafkamq
+  HelloWorldMySqlConStr: Server=sql-data;Initial Catalog=db;User Id=sa;Password=Pass@word;

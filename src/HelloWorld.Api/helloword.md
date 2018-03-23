@@ -1,6 +1,6 @@
 # registry
-docker tag helloworldapi:v1.0 justmine/helloworldapi:v1.0
-docker push justmine/helloworldapi:v1.0
+docker tag helloworldapi:v2.2 justmine/helloworldapi:v2.2
+docker push justmine/helloworldapi:v2.2
 
 # docker
 docker run -d -p 8001:80 --name helloworldapi justmine/helloworldapi:v1.0
@@ -16,10 +16,19 @@ kubectl get pod -n k8s-ecoysystem-apps -o wide
 kubectl describe pod helloworldapi -n k8s-ecoysystem-apps  
 kubectl delete pod helloworldapi -n k8s-ecoysystem-apps
 
-# deployment
-rm hello-world-deployment.yml && cat << eof>hello-world-deployment.yml
+# configmap
+cat << eof>hello-world-configmap.yml
+kubectl apply -f hello-world-configmap.yml  
+kubectl delete -f hello-world-configmap.yml  
+kubectl get configmaps externalcfg -o yaml
+kubectl describe configmaps externalcfg -n k8s-ecoysystem-apps  
 
-kubectl apply -f hello-world-deployment.yml
+# deployment
+cat << eof>hello-world-deployment.yml
+cat << eof>hello-world-deployment-with-settings.yml
+
+kubectl apply -f hello-world-deployment.yml --record
+kubectl apply -f hello-world-deployment-with-settings.yml --record
 kubectl create -f hello-world-deployment.yml
 kubectl delete -f hello-world-deployment.yml
 kubectl delete -f hello-world-deployment.yml --cascade=false 
