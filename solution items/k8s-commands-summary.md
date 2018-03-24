@@ -9,3 +9,7 @@
 >usage: kubectl exec -it lifecycle-demo -- /bin/bash 
 # kubectl delete
 >Ç¿ÖÆÉ¾³ýpod: kubectl delete <resource> --grace-period=0 --force
+# kubectl get pods --show-labels
+# kubectl set image <deployment> <imagename>
+# kubectl rollout status deployments <deployment>
+# kubectl exec my-nginx-3800858182-jr4a2 -- printenv | grep SERVICE
