@@ -33,6 +33,19 @@ kubectl create -f hello-world-deployment.yml
 kubectl delete -f hello-world-deployment.yml
 kubectl delete -f hello-world-deployment.yml --cascade=false 
 kubectl describe deployment hello-world-api-deployment
+# monitor the progress for a Deployment
+kubectl rollout status deployments hello-world-api-deployment
+
+kubectl rollout history hello-world-api-deployment
+kubectl rollout history hello-world-api-deployment --revision=2
+# Rolling Back to a Previous Revision
+kubectl rollout undo hello-world-api-deployment
+# rollback to a specific revision
+kubectl rollout undo deployment/nginx-deployment --to-revision=2
+# Scaling a Deployment
+kubectl scale deployment nginx-deployment --replicas=10
+# autoscaling based on the CPU utilization of your existing Pods.
+kubectl autoscale deployment nginx-deployment --min=10 --max=15 --cpu-percent=80
 
 # service
 rm hello-world-service.yml && cat << eof>hello-world-service.yml

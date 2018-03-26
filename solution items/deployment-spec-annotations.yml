@@ -16,6 +16,10 @@ spec:
   selector:
     matchLabels:
       app: nginx
+  # 
+  progressDeadlineSeconds: 600
+  # specify how many old ReplicaSets for this Deployment you want to retain
+  revisionHistoryLimit: 10
   # specifies the strategy used to replace old Pods by new ones.it can be¡°Recreate¡±or¡°RollingUpdate¡±.¡°RollingUpdate¡±is the default value.
   strategy:
     type: Recreate
