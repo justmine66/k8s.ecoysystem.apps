@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace HelloWorld.Api
+﻿namespace HelloWorld.Api
 {
     /// <summary>应用程序配置信息
     /// </summary>
