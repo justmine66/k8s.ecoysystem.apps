@@ -12,3 +12,5 @@ sudo mkdir -p /etc/docker/certs.d/registry.geekbuy.cn
 sudo cp certs/domain.crt /etc/docker/certs.d/registry.geekbuy.cn/ca.crt
 # 安装证书后，重启Docker Daemon
 sudo service docker restart
+或
+sudo systemctl restart docker.service

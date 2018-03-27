@@ -16,6 +16,8 @@ kubectl get pod -n k8s-ecoysystem-apps -o wide
 kubectl describe pod helloworldapi -n k8s-ecoysystem-apps  
 kubectl delete pod helloworldapi -n k8s-ecoysystem-apps
 
+kubectl exec -n k8s-ecoysystem-apps -it helloworldapi-768889b99b-chxmh sh 
+
 # configmap
 cat << eof>hello-world-configmap.yml
 kubectl apply -f hello-world-configmap.yml  
@@ -48,10 +50,17 @@ kubectl scale deployment nginx-deployment --replicas=10
 kubectl autoscale deployment nginx-deployment --min=10 --max=15 --cpu-percent=80
 
 # service
-rm hello-world-service.yml && cat << eof>hello-world-service.yml
+cat << eof>hello-world-service.yml
 
 kubectl apply -f hello-world-service.yml
 kubectl get service hello-world-api-svc
+
+# configmap
+cat << eof>appsetting.yml
+
+kubectl apply -f appsetting.yml
+
+
 
 
 

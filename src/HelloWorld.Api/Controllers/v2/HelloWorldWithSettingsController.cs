@@ -29,6 +29,7 @@ namespace HelloWorld.Api.Controllers.v1
                 $"{DateTime.Now}",
                 $"{_env.ApplicationName}",
                 $"{_env.EnvironmentName}",
+                $"{_env.ContentRootPath}",
                 $"数据库连接字符串: {_settings.ConnectionString}",
                 $"事件总线连接字符串: {_settings.EventBusConnection}"
             };

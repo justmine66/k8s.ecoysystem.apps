@@ -100,6 +100,9 @@ spec:
       hostPort: 8080
     # liveness for Containers. the kubelet uses liveness probes to know when to restart a Container. 
     livenessProbe:
+      failureThreshold: 3
+      successThreshold: 1
+      timeoutSeconds: 30
       httpGet:
         path: /api/v1/heathchecks/liveness
         port: heath-port
