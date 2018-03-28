@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: monitoring-influxdb
-  namespace: kube-system
+  namespace: k8s-ecoysystem-apps
 spec:
   replicas: 1
   selector:
@@ -18,7 +18,6 @@ spec:
       containers:
       - name: influxdb
         image: justmine/heapster-influxdb-amd64:v1.3.3
-		imagePullPolicy: IfNotPresent
         volumeMounts:
         - mountPath: /data
           name: influxdb-storage
@@ -34,8 +33,9 @@ metadata:
     kubernetes.io/cluster-service: 'true'
     kubernetes.io/name: monitoring-influxdb
   name: monitoring-influxdb
-  namespace: kube-system
+  namespace: k8s-ecoysystem-apps
 spec:
+  type: NodePort
   ports:
   - port: 8086
     targetPort: 8086

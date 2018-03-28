@@ -19,7 +19,7 @@ If the daemon.json file does not exist, create it. Assuming there are no other s
 > http: docker run --restart=always --name registry.geekbuy.cn -d -p 5000:5000 -v /geekbuy/registry registry:2
 > https: docker run -d \
   --restart=always \
-  --name registry \
+  --name registry.geekbuy.cn \
   -v `pwd`/certs:/certs \
   -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
   -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
@@ -33,9 +33,7 @@ If the daemon.json file does not exist, create it. Assuming there are no other s
 # 从私有仓库拉取
 >docker pull registry.geekbuy.cn/[username]/[image-name]
 # 查看私用仓库中的镜像
->curl -XGET registry.geekbuy.cn:5000/v2/_catalog
->或
->在浏览器上访问 http://registry.geekbuy.cn:5000/v2/_catalog
+>在浏览器上访问 http://registry.geekbuy.cn:5000/v2/_catalog 或 https://registry.geekbuy.cn/v2/_catalog
 # stop and remove local registry  
 >docker container stop registry.geekbuy.cn && docker container rm -v registry.geekbuy.cn
 >或

@@ -1,10 +1,14 @@
 cat << eof>influxdb.yaml
-cat << eof>heapster.yaml
 cat << eof>grafana.yaml
+cat << eof>heapster.yaml
 
 kubectl apply -f influxdb.yaml
-kubectl apply -f heapster.yaml
 kubectl apply -f grafana.yaml
+kubectl apply -f heapster.yaml
+
+kubectl delete -f influxdb.yaml
+kubectl delete -f grafana.yaml
+kubectl delete -f heapster.yaml
 
 docker pull justmine/heapster-amd64:v1.4.2 
 docker tag justmine/heapster-amd64:v1.4.2  k8s.gcr.io/heapster-amd64:v1.4.2
@@ -24,6 +28,10 @@ kubectl get services --namespace=kube-system monitoring-grafana monitoring-influ
 kubectl -n kube-system edit service monitoring-grafana
 kubectl -n kube-system edit service monitoring-influxdb
 
-http://registry.geekbuy.cn:30017/
-http://registry.geekbuy.cn:31261/
+# kube-system
+http://registry.geekbuy.cn:30017
+http://registry.geekbuy.cn:31261
 
+# k8s-ecoysystem-apps
+grafana: http://registry.geekbuy.cn:32537
+influxdb: http://registry.geekbuy.cn:31271

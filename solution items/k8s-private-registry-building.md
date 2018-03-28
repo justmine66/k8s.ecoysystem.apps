@@ -9,7 +9,7 @@ kubectl create secret docker-registry regcred \
 --docker-password=<your-pword> \
 --docker-email=<your-email>
 
-kubectl create secret docker-registry regcred \
+kubectl -n k8s-ecoysystem-apps create secret docker-registry regcred \
 --docker-server=registry.geekbuy.cn \
 --docker-username=justmine \
 --docker-password=dkjustmine.c0m \
