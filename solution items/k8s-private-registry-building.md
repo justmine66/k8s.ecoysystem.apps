@@ -2,20 +2,14 @@
 >https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 
 # Create a Secret in the cluster that holds your authorization token
-kubectl delete secret regcred
-kubectl create secret docker-registry regcred \
+kubectl delete secret registry-key
+kubectl create secret docker-registry registry-key \
 --docker-server=<your-registry-server> \
 --docker-username=<your-name> \
 --docker-password=<your-pword> \
 --docker-email=<your-email>
 
-kubectl -n k8s-ecoysystem-apps create secret docker-registry regcred \
---docker-server=registry.geekbuy.cn \
---docker-username=justmine \
---docker-password=dkjustmine.c0m \
---docker-email=3538307147@qq.com
-
-# Inspecting the Secret regcred
-kubectl get secret regcred --output=yaml
-kubectl get secret regcred --output="jsonpath={.data.\.dockerconfigjson}" | base64 -d
+# Inspecting the Secret registry-key
+kubectl get secret registry-key --output=yaml
+kubectl get secret registry-key --output="jsonpath={.data.\.dockerconfigjson}" | base64 -d
 

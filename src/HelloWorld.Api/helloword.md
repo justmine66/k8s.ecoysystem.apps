@@ -1,6 +1,6 @@
 # registry
-docker tag helloworldapi:v2.2 justmine/helloworldapi:v2.2
-docker push justmine/helloworldapi:v2.2
+docker tag helloworldapi:v2.2 registry.geekbuy.cn/justmine/helloworldapi:v2.2
+docker push registry.geekbuy.cn/justmine/helloworldapi:v2.2
 
 # docker
 docker run -d -p 8001:80 --name helloworldapi justmine/helloworldapi:v1.0

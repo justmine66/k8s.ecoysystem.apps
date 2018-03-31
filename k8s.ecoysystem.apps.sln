@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthChecks.Api", "src\Hea
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6E524B4D-E574-4998-B15D-B4B454355794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld.Api", "src\HelloWorld.Api\HelloWorld.Api.csproj", "{13715DBF-3AA3-43FB-8FF8-E2B6BDA3E810}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWorld.Api", "src\HelloWorld.Api\HelloWorld.Api.csproj", "{13715DBF-3AA3-43FB-8FF8-E2B6BDA3E810}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "secret", "secret", "{E731197B-79DC-4846-A565-7E49AC5AACC0}"
 	ProjectSection(SolutionItems) = preProject
@@ -57,6 +57,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "volume", "volume", "{8EF35D
 		solution items\volume\persistent-volume-claim.yml = solution items\volume\persistent-volume-claim.yml
 		solution items\volume\persistent-volume.yml = solution items\volume\persistent-volume.yml
 		solution items\volume\volume-commands-summary.md = solution items\volume\volume-commands-summary.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dashboard", "dashboard", "{8964D5E9-D116-4CB5-8196-6B99858FD402}"
+	ProjectSection(SolutionItems) = preProject
+		solution items\dashboard\dashboard.yml = solution items\dashboard\dashboard.yml
 	EndProjectSection
 EndProject
 Global
@@ -87,6 +92,7 @@ Global
 		{E731197B-79DC-4846-A565-7E49AC5AACC0} = {1A47983A-EF2F-4857-9C13-CC23EC7FC495}
 		{1291443F-1E89-4750-AECF-46974847E827} = {1A47983A-EF2F-4857-9C13-CC23EC7FC495}
 		{8EF35DA7-592A-4997-9038-E3925370E65F} = {1A47983A-EF2F-4857-9C13-CC23EC7FC495}
+		{8964D5E9-D116-4CB5-8196-6B99858FD402} = {1A47983A-EF2F-4857-9C13-CC23EC7FC495}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {404CA4B7-EDF7-4FFD-972E-FF4D00AD2BA7}
