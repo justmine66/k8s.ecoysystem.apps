@@ -15,16 +15,17 @@ spec:
       namespace: k8s-ecoysystem-apps
     spec:
       volumes:
-      - name: helloworldapiSettings
+      - name: appsetting
         configMap:
           name: helloworldapi-appsetting
+      imagePullSecrets:
+      - name: registry-key
       containers:
       - name: helloworldapi
-        image: justmine/helloworldapi:v2.2
+        image: registry.geekbuy.cn/justmine/helloworldapi:v2.2
         imagePullPolicy: Always
         volumeMounts:
-        - name: helloworldapiSettings
-          mountPath: "/"
-          readonly: true
+        - name: appsetting
+          mountPath: "/settings"
         ports:
         - containerPort: 80

@@ -16,7 +16,7 @@ kubectl get pod -n k8s-ecoysystem-apps -o wide
 kubectl describe pod helloworldapi -n k8s-ecoysystem-apps  
 kubectl delete pod helloworldapi -n k8s-ecoysystem-apps
 
-kubectl exec -n k8s-ecoysystem-apps -it helloworldapi-768889b99b-chxmh sh 
+kubectl exec -n k8s-ecoysystem-apps -it helloworldapi-5859cf596f-sg8r4  sh 
 
 # configmap
 cat << eof>hello-world-configmap.yml

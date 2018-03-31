@@ -6,5 +6,9 @@ metadata:
   labels:
     app: helloworldapi  
 data:
-  HelloWorldBus: kafkamq
-  HelloWorldMySqlConStr: Server=sql-data;Initial Catalog=db;User Id=sa;Password=Pass@word;
+  EventBus: kafkamq
+  MySqlConStr: Server=sql-data;Initial Catalog=db;User Id=sa;Password=Pass@word;
+  Version: 0.1.0
+  Logging: 
+    IncludeScopes=false
+    Debug:
