@@ -14,8 +14,10 @@ spec:
         app: helloworldapi
       namespace: k8s-ecoysystem-apps
     spec:
+      imagePullSecrets:
+      - name: registry-key
       containers:
       - name: helloworldapi
-        image: justmine/helloworldapi:v1.0
+        image: registry.geekbuy.cn/justmine/helloworldapi:v2.2
         ports:
         - containerPort: 80
