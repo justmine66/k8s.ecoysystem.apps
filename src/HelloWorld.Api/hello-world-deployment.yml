@@ -18,6 +18,6 @@ spec:
       - name: registry-key
       containers:
       - name: helloworldapi
-        image: registry.geekbuy.cn/justmine/helloworldapi:v2.2
+        image: registry.wuling.com/justmine/helloworldapi:v2.2
         ports:
         - containerPort: 80

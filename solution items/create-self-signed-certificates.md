@@ -8,8 +8,8 @@ $ openssl req \
 Be sure to use the name [目标域名] as a CN.
 
 # docker client安装CA证书
-sudo mkdir -p /etc/docker/certs.d/registry.geekbuy.cn
-sudo cp certs/domain.crt /etc/docker/certs.d/registry.geekbuy.cn/ca.crt
+sudo mkdir -p /etc/docker/certs.d/registry.wuling.com
+sudo cp certs/domain.crt /etc/docker/certs.d/registry.wuling.com/ca.crt
 # 安装证书后，重启Docker Daemon
 sudo service docker restart
 或

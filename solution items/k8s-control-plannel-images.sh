@@ -20,3 +20,6 @@ do
 	docker rmi justmine/$imageName;
 done
 docker pull quay.io/coreos/flannel:v0.9.1-amd64;
+
+docker pull justmine/kubernetes-dashboard-amd64:v1.8.3
+docker tag justmine/kubernetes-dashboard-amd64:v1.8.3 k8s.gcr.io/kubernetes-dashboard-amd64:v1.8.3

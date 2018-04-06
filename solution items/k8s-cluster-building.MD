@@ -62,4 +62,28 @@ as root:
   kubeadm reset
   kubeadm join --token 9890f9.6dff2525b35b0907 192.168.10.145:6443 --discovery-token-ca-cert-hash sha256:71101db4afbb793c305c15b5f458e93c1f96bc0b13ef8579053bc9f93dead5d3
 
+--ÌÚÑ¶ÔÆ
+sed -i "s/cgroup-driver=cgroupfs/cgroup-driver=systemd/g" /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+
+systemctl daemon-reload && systemctl enable kubelet && systemctl restart kubelet 
+
+kubeadm init 
+--apiserver-advertise-address 150.109.39.33 \
+--pod-network-cidr=192.168.0.0/16 \
+version=v1.10.0
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+You can now join any number of machines by running the following on each node
+as root:
+
+  kubeadm join 10.214.70.185:6443 --token h3gwyu.m47mru3xbij5at38 --discovery-token-ca-cert-hash sha256:b9f94beb388438927f9ad27fcd566cf9c10e02037e3307584aae4fb8542ba69c
 
