@@ -2,13 +2,13 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: heapster
-  namespace: k8s-ecoysystem-apps
+  namespace: kube-system
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: heapster
-  namespace: k8s-ecoysystem-apps
+  namespace: kube-system
 spec:
   replicas: 1
   selector:
@@ -24,12 +24,12 @@ spec:
       serviceAccountName: heapster
       containers:
       - name: heapster
-        image: justmine/heapster-amd64:v1.4.2
+        image: k8s.gcr.io/heapster-amd64:v1.4.2
         imagePullPolicy: IfNotPresent
         command:
         - /heapster
-        - --source=kubernetes:http://registry.geekbuy.cn:8080?inClusterConfig=false&kubeletHttps=true&kubeletPort=10250&useServiceAccount=true&auth=
-        - --sink=influxdb:http://registry.geekbuy.cn:31271
+        - --source=kubernetes:https://kubernetes.default
+        - --sink=influxdb:http://150.109.39.33:31001
 ---
 apiVersion: v1
 kind: Service
@@ -41,7 +41,7 @@ metadata:
     kubernetes.io/cluster-service: 'true'
     kubernetes.io/name: Heapster
   name: heapster
-  namespace: k8s-ecoysystem-apps
+  namespace: kube-system
 spec:
   ports:
   - port: 80
