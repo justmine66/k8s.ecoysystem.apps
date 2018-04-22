@@ -15,7 +15,7 @@ namespace HelloWorld.Api.Controllers.v1
         {
             string msg = string.Format("{0} hello world!", DateTime.Now);
             Console.WriteLine(msg);
-            return new string[] { msg};
+            return new string[] { msg};     
         }
     }
 }

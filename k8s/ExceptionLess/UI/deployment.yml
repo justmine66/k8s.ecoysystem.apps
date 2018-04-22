@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-hosted-exceptionless-ui
+  namespace: k8s-ecoysystem-apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-hosted-exceptionless-ui
+  template:
+    metadata:
+      labels:
+        app: nginx-hosted-exceptionless-ui
+    spec:
+      containers:
+      - image: justmine/nginx-hosted-exceptionless-ui:1.0
+        imagePullPolicy: Always
+        name: nginx-hosted-exceptionless-ui
+        ports:
+        - containerPort: 80
+          protocol: TCP
