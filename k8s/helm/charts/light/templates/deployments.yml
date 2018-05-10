@@ -1,0 +1,39 @@
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: {{ .Values.identity.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: light
+      component: identity
+      type: webapi
+      version: {{ .Values.identity.image.tag }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: light
+        component: identity
+        type: webapi
+        version: {{ .Values.identity.image.tag }}
+    spec:
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets.name }}
+      containers:
+      - name: {{ .Values.identity.name }}
+        image: "{{ .Values.identity.image.repository }}:{{ .Values.identity.image.tag }}"
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        ports:
+        - containerPort: {{ .Values.containerPort }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.readinessProbe.httpGet.path }}
+            port: {{ .Values.readinessProbe.httpGet.port }}
+            scheme: {{ .Values.readinessProbe.httpGet.scheme }} 
+          initialDelaySeconds: {{ .Values.readinessProbe.httpGet.initialDelaySeconds }} 
+          periodSeconds: {{ .Values.readinessProbe.httpGet.periodSeconds }}  
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: {{ .Values.environment }}

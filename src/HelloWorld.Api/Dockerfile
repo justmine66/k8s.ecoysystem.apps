@@ -3,3 +3,4 @@ WORKDIR /app
 EXPOSE 80
 COPY . .
 ENTRYPOINT ["dotnet", "HelloWorld.Api.dll"]
+  

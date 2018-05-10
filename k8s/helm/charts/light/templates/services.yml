@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.identity.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: light
+    component: identity
+    type: webapi
+    version: {{ .Values.identity.image.tag }}
+  annotations:
+    traefik.backend.circuitbreaker: {{ .Values.traefik.backend.circuitbreaker }},
+    traefik.backend.loadbalancer.method: {{ .Values.traefik.backend.loadbalancer.method }}
+spec:
+  selector:
+    app: light
+    component: identity
+    type: webapi
+  ports:
+  - port: 80

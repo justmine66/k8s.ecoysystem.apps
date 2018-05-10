@@ -1,0 +1,13 @@
+name: light
+description: A service layer API project of the geekbuying
+version: 0.0.0
+tillerVersion: ">=2.4.0"
+keywords:
+  - geekbuying
+  - light
+home: http://gitlab.geekbuy.cn:8081/geekbuying/API/Light
+sources:
+  - https://registry.xcmaster.com:8080
+maintainers:
+  - name: lijun 
+    email: lijun@geekbuy.com.cn

@@ -1,0 +1,34 @@
+replicaCount: 2
+restartPolicy: Aways
+imagePullPolicy: IfNotPresent
+environment: Production
+namespace: k8s-ecoysystem-apps
+version: 0.0.0
+containerPort: 80
+
+imagePullSecrets:
+  name: registry-key
+
+readinessProbe:
+  httpGet:
+    path: /healthchecks
+    port: 80
+    scheme: HTTP 
+  initialDelaySeconds: 30
+  periodSeconds: 60 
+
+traefik:
+  backend:
+    circuitbreaker: "NetworkErrorRatio() > 0.5"
+    loadbalancer:
+      method: "drr"
+
+identity:
+  name: identity-api
+  image:
+    repository: registry.xcmaster.com:8080/light/identity.api
+    tag: 0.0.0
+
+service:
+  type: ClusterIP
+  port: 80
