@@ -13,5 +13,9 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"templat
 # 查看已发布的列表
 helm ls
 
+# 目录
+/root/.helm/cache/archive
+
 # 发布版本
-helm install <chart path>
+helm install https://github.com/justmine66/k8s.ecoysystem.apps/tree/master/k8s/helm/charts/light
+helm --dry-run --debug install https://github.com/justmine66/k8s.ecoysystem.apps/tree/master/k8s/helm/charts/light
