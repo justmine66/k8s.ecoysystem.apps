@@ -1,0 +1,33 @@
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: helloworldapi
+  namespace: k8s-ecoysystem-apps
+spec:
+  selector:
+    matchLabels:
+      app: helloworldapi
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: helloworldapi
+      namespace: k8s-ecoysystem-apps
+    spec:
+      containers:
+      - name: helloworldapi
+        image: justmine/helloworldapi:v2.2
+        imagePullPolicy: Always
+        env:
+        - name: ConnectionString
+          valueFrom:
+            configMapKeyRef:
+              name: helloworldapi-appsetting
+              key: HelloWorldMySqlConStr
+        - name: EventBusConnection
+          valueFrom:
+            configMapKeyRef:
+              name: helloworldapi-appsetting
+              key: HelloWorldBus
+        ports:
+        - containerPort: 80

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using HelloWorld.Api.Extensions;
 
 namespace HelloWorld.Api
 {
@@ -11,7 +12,8 @@ namespace HelloWorld.Api
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            WebHost.CreateDefaultBuilder()
+                .UseConfigrationWithDir("configrations")
                 .UseStartup<Startup>()
                 .Build();
     }

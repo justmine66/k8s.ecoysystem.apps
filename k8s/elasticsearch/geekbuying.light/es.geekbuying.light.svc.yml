@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: geekbuying-light-addons
+  name: elasticsearch-geekbuying-light
+  labels:
+    component: elasticsearch
+    role: geekbuying-light
+spec:
+  type: NodePort
+  selector:
+    component: elasticsearch
+    role: geekbuying-light
+  ports:
+  - name: http
+    nodePort: 32009
+    port: 9200
+    protocol: TCP

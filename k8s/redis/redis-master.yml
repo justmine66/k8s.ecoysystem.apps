@@ -1,0 +1,39 @@
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: redis-master
+  namespace: geekbuying-light-addons
+spec:
+  selector:
+    matchLabels:
+     name: redis
+     role: master
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        name: redis
+        role: master
+      name: redis-master
+    spec:
+      nodeSelector:
+        node-role.gkb.k8s/master: "106"
+      containers:
+      - name: master
+        image: redis:4.0.9
+        env:
+        - name: MASTER
+          value: "true"
+        ports:
+        - containerPort: 6379
+        resources:
+          limits:
+            cpu: "0.1"
+        volumeMounts:
+          - mountPath: /redis-master-data
+            name: data
+      volumes:
+        - name: data
+          hostPath:
+            path: /root/geekbuying/redis/master
+            type: DirectoryOrCreate

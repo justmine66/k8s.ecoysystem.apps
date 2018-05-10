@@ -1,0 +1,44 @@
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: elasticsearch-exceptionless
+  namespace: geekbuying-light-addons
+spec:
+  selector:
+    matchLabels:
+     component: elasticsearch
+     role: exceptionless
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: elasticsearch
+        role: exceptionless
+      name: elasticsearch-exceptionless
+    spec:
+      nodeSelector:
+        node-role.gkb.k8s/master: "106"
+      containers:
+      - name: elasticsearch-exceptionless
+        image: docker.elastic.co/elasticsearch/elasticsearch:5.6.9
+        securityContext:
+          capabilities:
+            add:
+              - IPC_LOCK
+        env:
+        - name: cluster.name
+          value: "elasticsearch-exceptionless"
+        - name: xpack.security.enabled
+          value: "false"
+        ports:
+        - containerPort: 9200
+          name: transport
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /data
+          name: storage
+      volumes:
+      - name: storage
+        hostPath:
+          path: /root/geekbuying/elasticsearch/exceptionless
+          type: DirectoryOrCreate

@@ -1,0 +1,31 @@
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: helloworldapi
+  namespace: k8s-ecoysystem-apps
+spec:
+  selector:
+    matchLabels:
+      app: helloworldapi
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: helloworldapi
+      namespace: k8s-ecoysystem-apps
+    spec:
+      volumes:
+      - name: appsetting
+        configMap:
+          name: helloworldapi-appsetting
+      imagePullSecrets:
+      - name: registry-key
+      containers:
+      - name: helloworldapi
+        image: registry.geekbuy.cn/justmine/helloworldapi:v2.3
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: appsetting
+          mountPath: "/settings"
+        ports:
+        - containerPort: 80

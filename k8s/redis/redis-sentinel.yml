@@ -1,0 +1,30 @@
+apiVersion: apps/v1  
+kind: Deployment
+metadata:
+  name: redis-sentinel
+  namespace: geekbuying-light-addons
+spec:
+  selector:
+    matchLabels:
+     name: redis
+     redis-sentinel: "true"
+     role: sentinel
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        name: redis
+        redis-sentinel: "true"
+        role: sentinel
+      name: redis-sentinel
+    spec:
+      nodeSelector:
+        node-role.gkb.k8s/master: "106"
+      containers:
+      - name: sentinel
+        image: redis:4.0.9
+        env:
+          - name: SENTINEL
+            value: "true"
+        ports:
+        - containerPort: 26379
